@@ -1,0 +1,15 @@
+server:
+  port: 8032
+
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://127.0.0.1:3306/web_project_db
+    username: dhkim1522
+    password: 1022
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+
