@@ -1,5 +1,5 @@
 server:
-  port: 8032
+  port: 8080
 
 spring:
   datasource:
@@ -13,3 +13,9 @@ spring:
       ddl-auto: create
     show-sql: true
 
+logging:
+  level:
+    root: error
+    org.springframework.web: debug
+    sql: debug
+    web: debug

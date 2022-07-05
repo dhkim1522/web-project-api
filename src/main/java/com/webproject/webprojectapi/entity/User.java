@@ -3,6 +3,7 @@ package com.webproject.webprojectapi.entity;
 import com.webproject.webprojectapi.dto.UserDTO;
 import lombok.*;
 import lombok.Data;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -19,7 +20,7 @@ public class User {
      */
     @Id
     @Column(name = "USER_SEQ_ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userSeqId;
 
     @Column(name = "USER_ID")
@@ -35,6 +36,7 @@ public class User {
     private String userEmail;
 
     public void update(UserDTO userDTO) {
+        this.userId = userDTO.getUserId();
         this.userName = userDTO.getUserName();
         this.userPassword = userDTO.getUserPassword();
         this.userEmail = userDTO.getUserEmail();

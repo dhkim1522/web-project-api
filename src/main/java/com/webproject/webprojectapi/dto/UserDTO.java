@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,7 +20,6 @@ public class UserDTO {
 
     public User toEntity() {
         return User.builder()
-                .userSeqId(userSeqId)
                 .userId(userId)
                 .userName(userName)
                 .userPassword(userPassword)
