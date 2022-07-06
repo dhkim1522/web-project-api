@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 3000
 
 spring:
   datasource:
@@ -15,7 +15,10 @@ spring:
 
 logging:
   level:
-    root: error
+    root: debug
     org.springframework.web: debug
     sql: debug
     web: debug
+
+
+

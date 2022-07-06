@@ -5,18 +5,25 @@ import com.webproject.webprojectapi.entity.User;
 import com.webproject.webprojectapi.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.ws.Response;
 import java.util.List;
 
 
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api")
 public class UserController {
 
     private final UserService userService;
+
+    @PostMapping("/login")
+    public User login(@RequestBody UserDTO userDTO) {
+        return userService.login(userDTO);
+    }
 
     @GetMapping("/user")
     public List<User> getUser() {
@@ -32,9 +39,8 @@ public class UserController {
     public User updateUser(@PathVariable("userSeqId") Long userSeqId, @RequestBody UserDTO userDTO) {
         return userService.updateUser(userSeqId, userDTO);
     }
-
     @DeleteMapping("/user/{userSeqId}")
     public void DeleteUser(@PathVariable("userSeqId") Long userSeqId) {
-        userService.deleteBook(userSeqId);
+        userService.deleteUser(userSeqId);
     }
 }
