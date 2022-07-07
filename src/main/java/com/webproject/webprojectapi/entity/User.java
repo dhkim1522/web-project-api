@@ -2,17 +2,22 @@ package com.webproject.webprojectapi.entity;
 
 import com.webproject.webprojectapi.dto.UserDTO;
 import lombok.*;
-import lombok.Data;
-import org.hibernate.annotations.Type;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Getter
 @Entity
-public class User {
+public class User implements UserDetails {
 
     /**
      *  회원(User) 엔티티
@@ -35,6 +40,10 @@ public class User {
     @Column(name = "USER_EMAIL")
     private String userEmail;
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Builder.Default
+    private List<String> roles = new ArrayList<>();
+
     public void update(UserDTO userDTO) {
         this.userId = userDTO.getUserId();
         this.userName = userDTO.getUserName();
@@ -42,8 +51,39 @@ public class User {
         this.userEmail = userDTO.getUserEmail();
     }
 
-    /**
-     *  추후 생성되어야 할 필드 목록
-     *  가입일시, 생년월일, 성별 등 부수적 정보
-     */
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.roles.stream()
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public String getUsername() {
+        return this.userId;
+    }
+    @Override
+    public String getPassword() {
+        return this.userPassword;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

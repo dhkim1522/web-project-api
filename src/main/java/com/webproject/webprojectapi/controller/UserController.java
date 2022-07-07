@@ -1,11 +1,11 @@
 package com.webproject.webprojectapi.controller;
 
 import com.webproject.webprojectapi.dto.UserDTO;
+import com.webproject.webprojectapi.dto.UserLoginDTO;
 import com.webproject.webprojectapi.entity.User;
 import com.webproject.webprojectapi.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.ws.Response;
@@ -21,8 +21,8 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/login")
-    public User login(@RequestBody UserDTO userDTO) {
-        return userService.login(userDTO);
+    public String login(@RequestBody UserLoginDTO userLoginDTO) {
+        return userService.login(userLoginDTO);
     }
 
     @GetMapping("/user")
