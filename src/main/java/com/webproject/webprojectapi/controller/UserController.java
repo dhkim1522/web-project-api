@@ -4,6 +4,7 @@ import com.webproject.webprojectapi.dto.UserDTO;
 import com.webproject.webprojectapi.dto.UserLoginDTO;
 import com.webproject.webprojectapi.entity.User;
 import com.webproject.webprojectapi.service.UserService;
+import com.webproject.webprojectapi.vo.UserVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +21,13 @@ public class UserController {
 
     private final UserService userService;
 
+    // token 값 반환을 위해서 굳이 User 정보까지 같이 담은 UserVO를 리턴타입으로
+    // 구현해야 하는지 생각해 볼 필요 O
     @PostMapping("/login")
-    public String login(@RequestBody UserLoginDTO userLoginDTO) {
+    public UserVO login(@RequestBody UserLoginDTO userLoginDTO) {
+
+        log.info("login token 발급 " + userService.login(userLoginDTO).toString());
+
         return userService.login(userLoginDTO);
     }
 

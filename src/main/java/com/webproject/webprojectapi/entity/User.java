@@ -31,8 +31,10 @@ public class User implements UserDetails {
     @Column(name = "USER_ID")
     private String userId;
 
-    @Column(name = "USER_NAME")
-    private String userName;
+    // SpringSecurity의 UserDetails 구현체로 getUsername()
+    // 메서드를 반드시 구현해야하기 때문에 필드 명이 중복된다. 따라서 userNickname으로 대체한다.
+    @Column(name = "USER_NICKNAME")
+    private String userNickname;
 
     @Column(name = "USER_PASSWORD")
     private String userPassword;
@@ -46,7 +48,7 @@ public class User implements UserDetails {
 
     public void update(UserDTO userDTO) {
         this.userId = userDTO.getUserId();
-        this.userName = userDTO.getUserName();
+        this.userNickname = userDTO.getUserNickname();
         this.userPassword = userDTO.getUserPassword();
         this.userEmail = userDTO.getUserEmail();
     }

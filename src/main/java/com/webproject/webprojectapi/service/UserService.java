@@ -5,6 +5,7 @@ import com.webproject.webprojectapi.dto.UserLoginDTO;
 import com.webproject.webprojectapi.entity.User;
 import com.webproject.webprojectapi.jwt.JwtTokenProvider;
 import com.webproject.webprojectapi.repository.UserRepository;
+import com.webproject.webprojectapi.vo.UserVO;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,9 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -37,7 +36,7 @@ public class UserService{
         User user = User.builder()
                 .userId(userDTO.getUserId())
                 .userPassword(encodePassword)
-                .userName(userDTO.getUserName())
+                .userNickname(userDTO.getUserNickname())
                 .userEmail(userDTO.getUserEmail())
                 .roles(Collections.singletonList("ROLE_USER"))
                     .build();
@@ -59,7 +58,7 @@ public class UserService{
         userRepository.deleteById(userSeqId);
     }
 
-    public String login(UserLoginDTO userLoginDTO) {
+    public UserVO login(UserLoginDTO userLoginDTO) {
         User loginUser = userLoginDTO.toEntity();
 
         // 로그인 시 가입 회원이 맞는지 DB 조회
@@ -73,6 +72,15 @@ public class UserService{
 
         log.info("로그인 비밀번호 일치");
 
-        return jwtTokenProvider.createToken(user.getUsername(),user.getRoles()); // getUsername 이지만 실제 return은 userId를 가져온다.
+        // JWT Token 생성 - getUsername 이지만 실제 return은 userId를 가져온다.
+        String token = jwtTokenProvider.createToken(user.getUsername(),user.getRoles());
+
+        return UserVO.builder()
+                .userId(user.getUserId())
+                .userPassword(user.getUserPassword())
+                .userNickname(user.getUserNickname())
+                .userEmail(user.getUserEmail())
+                .token(token)
+                .build();
     }
 }

@@ -12,14 +12,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Data
 public class UserDTO {
     private String userId;
-    private String userName;
+    private String userNickname;
     private String userPassword;
     private String userEmail;
 
     public User toEntity() {
         return User.builder()
                 .userId(userId)
-                .userName(userName)
+                .userNickname(userNickname)
                 .userPassword(userPassword)
                 .userEmail(userEmail)
                 .build();
