@@ -10,12 +10,12 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create #create update none
+      ddl-auto: update #create update none
     show-sql: true
 
 logging:
   level:
-    root: debug
+    root: error
     org.springframework.web: debug
     sql: debug
     web: debug

@@ -1,6 +1,8 @@
 package com.webproject.webprojectapi.controller;
 
-import com.webproject.webprojectapi.entity.User;
+import com.webproject.webprojectapi.jpql.AvgAetByDay;
+import com.webproject.webprojectapi.jpql.AvgAetByMonth;
+import com.webproject.webprojectapi.service.DataServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,11 +14,18 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/data")
 public class DataController {
 
-    @GetMapping("/data")
-    public String getData() {
-        return "API Data 호출";
+    private final DataServiceImpl dataServiceImpl;
+
+    @GetMapping("/month/avgaet")
+    public List<AvgAetByMonth> getAvgAetMonth() {
+        return dataServiceImpl.getAvgAetMonth();
+    }
+
+    @GetMapping("/day/avgaet")
+    public List<AvgAetByDay> getAvgAetDay() {
+        return dataServiceImpl.getAvgAetDay();
     }
 }

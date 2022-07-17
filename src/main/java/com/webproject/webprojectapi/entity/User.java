@@ -28,19 +28,20 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userSeqId;
 
-    @Column(name = "USER_ID")
+    @Column(name = "USER_ID", length = 20)
     private String userId;
+
+    @Column(name = "USER_EMAIL", length = 20)
+    private String userEmail;
 
     // SpringSecurity의 UserDetails 구현체로 getUsername()
     // 메서드를 반드시 구현해야하기 때문에 필드 명이 중복된다. 따라서 userNickname으로 대체한다.
-    @Column(name = "USER_NICKNAME")
+    @Column(name = "USER_NICKNAME", length = 10)
     private String userNickname;
 
     @Column(name = "USER_PASSWORD")
     private String userPassword;
 
-    @Column(name = "USER_EMAIL")
-    private String userEmail;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
