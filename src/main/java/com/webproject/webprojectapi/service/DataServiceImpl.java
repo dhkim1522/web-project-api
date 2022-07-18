@@ -1,7 +1,6 @@
 package com.webproject.webprojectapi.service;
 
-import com.webproject.webprojectapi.jpql.AvgAetByDay;
-import com.webproject.webprojectapi.jpql.AvgAetByMonth;
+import com.webproject.webprojectapi.queryInterface.*;
 import com.webproject.webprojectapi.repository.DataRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,12 +16,34 @@ public class DataServiceImpl implements DataService {
     private final DataRepository dataRepository;
 
     @Override
-    public List<AvgAetByMonth> getAvgAetMonth() {
-        return dataRepository.findAvgAetByMonth();
+    public List<AvgAetMonth> getAvgAetMonth() {
+        return dataRepository.findAvgAetMonth();
     }
 
     @Override
-    public List<AvgAetByDay> getAvgAetDay() {
-        return dataRepository.findAvgAetByDay();
+    public List<AvgAetDay> getAvgAetDay(Integer month) {
+        return dataRepository.findAvgAetDay(month);
     }
+
+    @Override
+    public List<AvgDepDelayMonth> getAvgDepDelayMonth() {
+        return dataRepository.findAvgDepDelayMonth();
+    }
+
+    @Override
+    public List<AvgDepDelayDay> getAvgDepDelayDay(Integer month) {
+        return dataRepository.findAvgDepDelayDay(month);
+    }
+
+    @Override
+    public List<DelayCount> getDelayCount() {
+        return dataRepository.findDelayCount();
+    }
+
+    @Override
+    public List<DelayRate> getDelayRate() {
+        return dataRepository.findDelayRate();
+    }
+
+
 }

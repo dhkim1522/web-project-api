@@ -1,13 +1,16 @@
 package com.webproject.webprojectapi.service;
 
-import com.webproject.webprojectapi.jpql.AvgAetByDay;
-import com.webproject.webprojectapi.jpql.AvgAetByMonth;
+import com.webproject.webprojectapi.queryInterface.*;
 
 import java.util.List;
 
 public interface DataService {
 
-    List<AvgAetByMonth> getAvgAetMonth();
+    List<AvgAetMonth> getAvgAetMonth();
+    List<AvgAetDay> getAvgAetDay(Integer month);
+    List<AvgDepDelayMonth> getAvgDepDelayMonth();
+    List<AvgDepDelayDay> getAvgDepDelayDay(Integer month);
+    List<DelayCount> getDelayCount();
+    List<DelayRate> getDelayRate();
 
-    List<AvgAetByDay> getAvgAetDay();
 }

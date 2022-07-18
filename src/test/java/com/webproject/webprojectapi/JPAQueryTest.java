@@ -1,6 +1,6 @@
 package com.webproject.webprojectapi;
 
-import com.webproject.webprojectapi.jpql.AvgAetByMonth;
+import com.webproject.webprojectapi.queryInterface.AvgAetMonth;
 import com.webproject.webprojectapi.repository.DataRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -25,7 +25,7 @@ public class JPAQueryTest {
     @DisplayName("JPA 순수 Query 작성으로 데이터를 조회해오는지 테스트")
     public void selectDataTest() {
 
-        List<AvgAetByMonth> list = new ArrayList<>();
+        List<AvgAetMonth> list = new ArrayList<>();
 
         list = dataRepository.findAvgActualElapsedTimeByMonth();
     }
