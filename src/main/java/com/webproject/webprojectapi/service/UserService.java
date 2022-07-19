@@ -10,7 +10,7 @@ import java.util.List;
 public interface UserService {
 
     // 회원 조회
-    List<User> getUser();
+    User getUser(Long userSeqId);
 
     // 회원 생성
     User createUser(UserDTO userDTO);
@@ -23,4 +23,7 @@ public interface UserService {
 
     // 로그인
     UserVO login(UserLoginDTO userLoginDTO);
+
+    // 전체 카운트
+    Long getCountAll();
 }

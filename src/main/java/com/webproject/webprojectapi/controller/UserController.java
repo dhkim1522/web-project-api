@@ -3,6 +3,7 @@ package com.webproject.webprojectapi.controller;
 import com.webproject.webprojectapi.dto.UserDTO;
 import com.webproject.webprojectapi.dto.UserLoginDTO;
 import com.webproject.webprojectapi.entity.User;
+import com.webproject.webprojectapi.queryInterface.AvgAetDay;
 import com.webproject.webprojectapi.service.UserServiceImpl;
 import com.webproject.webprojectapi.vo.UserVO;
 import lombok.RequiredArgsConstructor;
@@ -30,9 +31,9 @@ public class UserController {
         return userServiceImpl.login(userLoginDTO);
     }
 
-    @GetMapping("/user")
-    public List<User> getUser() {
-        return userServiceImpl.getUser();
+    @GetMapping("/user/{userSeqId}")
+    public User getUser(@PathVariable("userSeqId") Long userSeqId) {
+        return userServiceImpl.getUser(userSeqId);
     }
 
     @PostMapping("/user")
@@ -47,5 +48,10 @@ public class UserController {
     @DeleteMapping("/user/{userSeqId}")
     public void DeleteUser(@PathVariable("userSeqId") Long userSeqId) {
         userServiceImpl.deleteUser(userSeqId);
+    }
+
+    @GetMapping("/user/count")
+    public Long getCountAll() {
+        return userServiceImpl.getCountAll();
     }
 }

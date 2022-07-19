@@ -45,5 +45,19 @@ public class DataServiceImpl implements DataService {
         return dataRepository.findDelayRate();
     }
 
+    @Override
+    public List<CancelDivertCount> getCancelDivertCount() {
+        return dataRepository.findCancelDivertCount();
+    }
+
+    @Override
+    public List<CancelCodeCount> getCancelCodeCount() {
+        return dataRepository.findCancelCodeCount();
+    }
+
+    @Override
+    public Long getCountAll() {
+        return dataRepository.countBy();
+    }
 
 }

@@ -50,7 +50,6 @@ public class User implements UserDetails {
     public void update(UserDTO userDTO) {
         this.userId = userDTO.getUserId();
         this.userNickname = userDTO.getUserNickname();
-        this.userPassword = userDTO.getUserPassword();
         this.userEmail = userDTO.getUserEmail();
     }
 

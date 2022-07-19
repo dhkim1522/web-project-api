@@ -56,7 +56,7 @@ public class Data {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ROW_ID")
-    private Long rowId;
+    private Long RowId;
 
     @Column(name = "YEAR")
     private Integer Year;

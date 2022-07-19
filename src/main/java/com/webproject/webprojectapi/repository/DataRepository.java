@@ -77,6 +77,28 @@ public interface DataRepository extends JpaRepository<Data, Long> {
             "\t) data\n" +
             "  ) x", nativeQuery = true)
     List<DelayRate> findDelayRate();
+
+
+    // 운항 취소 및 우회 운항 건 수
+    @Query(value = "select cancelCount, divertCount\n" +
+            "from (\n" +
+            "select COUNT(*) as cancelCount\n" +
+            "from data\n" +
+            "where cancelled = 1) x,\n" +
+            "(select COUNT(*) as divertCount  \n" +
+            "from data\n" +
+            "where diverted = 1) y", nativeQuery = true)
+    List<CancelDivertCount> findCancelDivertCount();
+
+    // 운항 취소 코드 별 건 수
+    @Query(value = "select cancellation_code as cancelCode, COUNT(*) as count  \n" +
+            "from data\n" +
+            "WHERE cancelled = 1\n" +
+            "group by cancellation_code ", nativeQuery = true)
+    List<CancelCodeCount> findCancelCodeCount();
+
+    // 전체 데이터 개수
+    Long countBy();
 }
 
 

@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
  */
 public class UserVO {
 
+    private String userSeqId;
     private String userId;
     private String userNickname;
     private String userPassword;

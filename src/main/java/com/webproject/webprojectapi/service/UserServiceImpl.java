@@ -24,8 +24,12 @@ public class UserServiceImpl implements UserService {
     private final JwtTokenProvider jwtTokenProvider;
 
     @Override
-    public List<User> getUser() {
-        return userRepository.findAll();
+    public User getUser(Long userSeqId) {
+
+        User user = userRepository.findByUserSeqId(userSeqId)
+                .orElseThrow(() -> new IllegalArgumentException("회원 정보가 존재하지 않습니다."));
+
+        return user;
     }
     @Override
     @Transactional
@@ -77,11 +81,17 @@ public class UserServiceImpl implements UserService {
         String token = jwtTokenProvider.createToken(user.getUsername(),user.getRoles());
 
         return UserVO.builder()
+                .userSeqId(String.valueOf(user.getUserSeqId()))
                 .userId(user.getUserId())
                 .userPassword(user.getUserPassword())
                 .userNickname(user.getUserNickname())
                 .userEmail(user.getUserEmail())
                 .token(token)
                 .build();
+    }
+
+    @Override
+    public Long getCountAll() {
+        return userRepository.countBy();
     }
 }

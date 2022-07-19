@@ -21,15 +21,6 @@ public class DataController {
         return dataServiceImpl.getAvgAetMonth();
     }
 
-
-//    @PostMapping("/login")
-//    public UserVO login(@RequestBody UserLoginDTO userLoginDTO) {
-//
-//        log.info("login token 발급 " + userServiceImpl.login(userLoginDTO).toString());
-//
-//        return userServiceImpl.login(userLoginDTO);
-//    }
-
     @GetMapping("/day/avgaet/{month}")
     public List<AvgAetDay> getAvgAetDay(@PathVariable("month") Integer month) {
         return dataServiceImpl.getAvgAetDay(month);
@@ -53,5 +44,20 @@ public class DataController {
     @GetMapping("/delay-rate")
     public List<DelayRate> getDelayRate() {
         return dataServiceImpl.getDelayRate();
+    }
+
+    @GetMapping("/cancel-divert")
+    public List<CancelDivertCount> getCancelDivertCount() {
+        return dataServiceImpl.getCancelDivertCount();
+    }
+
+    @GetMapping("/cancel-code")
+    public List<CancelCodeCount> getCancelCodeCount() {
+        return dataServiceImpl.getCancelCodeCount();
+    }
+
+    @GetMapping("/count")
+    public Long getCountAll() {
+        return dataServiceImpl.getCountAll();
     }
 }
