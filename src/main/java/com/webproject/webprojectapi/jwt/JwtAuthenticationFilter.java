@@ -2,6 +2,7 @@ package com.webproject.webprojectapi.jwt;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
@@ -23,6 +24,11 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         // 헤더에서 JWT 를 받아온다.
         String token = jwtTokenProvider.resolveToken((HttpServletRequest) servletRequest);
+
+        log.info("### token >>> " + token);
+
+        log.info("유효 검증 > " + jwtTokenProvider.validateToken(token));
+
         // 유효한 토큰인지 확인
         if (token != null && jwtTokenProvider.validateToken(token)) {
             // 토큰이 유효하면 토큰으로부터 유저 정보를 받아온다.
