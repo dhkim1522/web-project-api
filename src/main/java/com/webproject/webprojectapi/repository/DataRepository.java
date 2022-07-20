@@ -7,14 +7,17 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
+// TODO: 추후 nativeQuery가 아닌 JPA or JPQL로 구현하여 객체지향적으로 Refactoring
 public interface DataRepository extends JpaRepository<Data, Long> {
 
 
     /**
      * @Title 미국항공운항정보 데이터셋
      * @Author dhkim1522(김동현)
+     *
      * @InitalDescription
-     * > Aet : ActualElapsedTime (실제 운항 시간)
+     * Aet : ActualElapsedTime (실제 운항 시간)
+     *
      */
 
     // 월별 평균 항공 운항 시간
@@ -90,7 +93,7 @@ public interface DataRepository extends JpaRepository<Data, Long> {
             "where diverted = 1) y", nativeQuery = true)
     List<CancelDivertCount> findCancelDivertCount();
 
-    // 운항 취소 코드 별 건 수
+    // 운항 취소 사유 코드 별 건 수
     @Query(value = "select cancellation_code as cancelCode, COUNT(*) as count  \n" +
             "from data\n" +
             "WHERE cancelled = 1\n" +

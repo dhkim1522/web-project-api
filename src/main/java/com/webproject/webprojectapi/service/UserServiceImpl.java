@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
+// TODO: User 서비스단 예외처리 로직 구현해야 함
 @Slf4j
 @RequiredArgsConstructor
 @Service
@@ -31,6 +32,24 @@ public class UserServiceImpl implements UserService {
 
         return user;
     }
+
+    @Override
+    public Map<String, Integer> duplicationUserCheck(String userId) {
+
+        Map map = new HashMap();
+
+        Boolean DuplicationCheck = userRepository.findByUserId(userId).isPresent();
+
+        if(DuplicationCheck) {
+            map.put("duplication", 1); // 존재하면 1
+        } else {
+            map.put("duplication", 0); // 존재하지 않으면 0
+        }
+
+        return map;
+    }
+
+
     @Override
     @Transactional
     public User createUser(UserDTO userDTO) {

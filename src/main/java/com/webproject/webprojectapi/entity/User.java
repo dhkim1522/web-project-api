@@ -28,7 +28,7 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userSeqId;
 
-    @Column(name = "USER_ID", length = 20)
+    @Column(name = "USER_ID", unique = true, nullable = false, length = 20)
     private String userId;
 
     @Column(name = "USER_EMAIL", length = 20)
@@ -39,7 +39,7 @@ public class User implements UserDetails {
     @Column(name = "USER_NICKNAME", length = 10)
     private String userNickname;
 
-    @Column(name = "USER_PASSWORD")
+    @Column(name = "USER_PASSWORD", nullable = false)
     private String userPassword;
 
 

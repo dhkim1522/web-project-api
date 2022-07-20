@@ -1,24 +1,7 @@
-server:
-  port: 3000
+
+# application.yml
 
 spring:
-  datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://127.0.0.1:3306/web_project_db
-    username: dhkim1522
-    password: 1022
-
-  jpa:
-    hibernate:
-      ddl-auto: update #create update none
-    show-sql: true
-
-logging:
-  level:
-    root: error
-    org.springframework.web: debug
-    sql: debug
-    web: debug
-
-
+  profiles:
+    active: local  # local, dev
 
