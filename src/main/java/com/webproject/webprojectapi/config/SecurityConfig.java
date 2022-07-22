@@ -40,9 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // Spring Sec
                 .and()
                 .antMatcher("/api/**")
                 .authorizeRequests()
-                    .antMatchers("/api/user/login", "/api/user/signup").permitAll() // 권한 없을 시 login, signup 페이지만 접근 가능
-                    .antMatchers("/api/**").hasRole("USER") // 권한에 따른 접근 페이지 설정 가능
-//                .antMatchers("/api/**").permitAll() // 권한 없어도 모든 페이지 허용
+//                    .antMatchers("/api/user/login", "/api/user/signup").permitAll() // 권한 없을 시 login, signup 페이지만 접근 가능
+//                    .antMatchers("/api/**").hasRole("USER") // 권한에 따른 접근 페이지 설정 가능
+                .antMatchers("/api/**").permitAll() // 권한 없어도 모든 페이지 허용
                 .anyRequest().authenticated() // 그외 나머지는 권한 있을 때만 접근 가능ㅇ
                 /*.and()
                     // 로그인 설정

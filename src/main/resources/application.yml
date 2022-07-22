@@ -3,5 +3,9 @@
 
 spring:
   profiles:
-    active: local  # local, dev
+    active: local
+
+#spring:
+#  datasource:
+#    driver-class-name: org.mariadb.jdbc.Driver
 
