@@ -2,6 +2,8 @@ server:
   port: 3000
 
 spring:
+  application:
+    name: web-project-api
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://127.0.0.1:3306/web_project_db
@@ -13,12 +15,23 @@ spring:
       ddl-auto: update #create update none
     show-sql: true
 
+eureka:
+  instance:
+    # 표기되는 규칙 변경
+    # instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
+  instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id}
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+
 logging:
   level:
     root: debug
     org.springframework.web: debug
     sql: debug
     web: debug
+
+
 
 
 

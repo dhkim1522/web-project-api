@@ -2,9 +2,14 @@ server:
   port: 3000
 
 spring:
+  application:
+    name: web-project-api
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://192.168.65.38:3306/web_project_db
+    # Contrabass
+#    url: jdbc:mariadb://192.168.65.38/web_project_db
+    # GCP
+    url: jdbc:mariadb://34.64.201.171:3306/web_project_db
     username: dhkim1522
     password: 1022
 
